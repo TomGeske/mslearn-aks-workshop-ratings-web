@@ -4,6 +4,19 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require("compression-webpack-plugin");
 const API = process.env.API;
 
+const appInsights = require('applicationinsights');
+appInsights.setup('ae210bde-b2cb-424e-abd8-56954f99b974')
+    .setAutoDependencyCorrelation(true)
+    .setAutoCollectRequests(true)
+    .setAutoCollectPerformance(true, true)
+    .setAutoCollectExceptions(true)
+    .setAutoCollectDependencies(true)
+    .setAutoCollectConsole(true)
+    .setUseDiskRetryCaching(true)
+    .setSendLiveMetrics(false)
+    .setDistributedTracingMode(appInsights.DistributedTracingModes.AI)
+    .start();
+
 var onError = function (err, req, res) {
   console.log('Error with webpack proxy :', err);
 };
